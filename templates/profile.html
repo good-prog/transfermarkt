@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ player.name }} - Player profile | Transfermarkt Flask Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Context storage element read by JavaScript logic streams to track current index -->
+    <div id="playerContext" data-id="{{ player.id }}" class="hidden"></div>
+
+    <header class="tm-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="tm-text">transfermarkt</span><span class="domain-text">.com</span>
+            </div>
+            <div class="header-actions">
+                <span style="font-size:11px; margin-right:15px; color:#bdc3c7;">System Profile ID: {{ player.id
+                    }}</span>
+                <button class="login-btn"><i class="fa-solid fa-user"></i> Log in</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="left-column">
+
+            <!-- Main Master Profile Segment Card -->
+            <div class="card profile-card">
+                <div class="edit-actions-panel">
+                    <button id="editProfileBtn" class="action-btn edit-mode-btn">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+                    </button>
+                    <button id="saveProfileBtn" class="action-btn save-mode-btn hidden">
+                        <i class="fa-solid fa-floppy-disk"></i> Save to Database
+                    </button>
+                </div>
+
+                <div class="profile-header">
+                    <!-- Photo block container with data attributes mapping for image swaps -->
+                    <div class="player-photo-container" data-editable="photoUrl">
+                        {% if player.photo_url %}
+                        <img src="{{ player.photo_url }}" alt="{{ player.name }}" class="player-profile-img">
+                        {% else %}
+                        <div class="player-photo-placeholder"><i class="fa-solid fa-user-tie"></i></div>
+                        {% endif %}
+                        <div class="player-number" data-editable="number">{{ player.number }}</div>
+                    </div>
+
+                    <div class="player-main-info">
+                        <div class="club-info-row">
+                            <span class="status-badge">Active Status</span>
+                            <!-- Club Logo sub-container placeholder element frame -->
+                            <span class="club-logo-container" data-editable="logoUrl">
+                                {% if player.logo_url %}
+                                <img src="{{ player.logo_url }}" alt="Club Crest Shield" class="club-badge-img">
+                                {% endif %}
+                            </span>
+                            <span class="club-name" data-editable="club">{{ player.club }}</span>
+                        </div>
+                        <h1 class="player-name" id="mainPlayerName" data-editable="name">{{ player.name }}</h1>
+                        <p class="player-meta">
+                            <strong>Position:</strong> <span data-editable="position">{{ player.position }}</span>
+                            <span>|</span>
+                            <span><strong>Citizenship:</strong> {{ player.citizenship }}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="profile-quick-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">Date of birth/Age:</span>
+                        <span class="stat-value" data-editable="birthDate">{{ player.birth_date }}</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Live Cloud Link Connection:</span>
+                        <span class="stat-value" style="color:#2980b9; font-size:12px;">/player/{{ player.id }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep Specification Metadata Parameters Card -->
+            <div class="card data-card">
+                <div class="card-header">
+                    <h2>Comprehensive Database Information</h2>
+                </div>
+                <div class="card-body">
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <span class="data-label">Name in home country:</span>
+                            <span class="data-value" data-editable="homeName">{{ player.home_name }}</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">Preferred Foot:</span>
+                            <span class="data-value" data-editable="foot">{{ player.foot }}</span>
+                        </div>
+
+
+
+                        <div class="data-item">
+                            <span class="data-label">Joined Current Club:</span>
+                            <span class="data-value" data-editable="joinedDate">{{ player.joined_date }}</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">Contract Expiration:</span>
+                            <span class="data-value" data-editable="contract">{{ player.contract_expiry }}</span>
+                        </div>
+                    </div>
+
+                    <div class="position-details-section">
+                        <h3>Registered Structural Parameters</h3>
+                        <div class="position-boxes">
+                            <div class="pos-box main-pos">
+                                <span class="pos-type">Main position tracking label:</span>
+                                <span class="pos-name" id="subPositionDisplay">{{ player.position }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card history-card">
+                <div class="card-header">
+                    <h2>Transfer History</h2>
+                </div>
+                <div class="card-body" style="padding: 0;">
+                    <table class="transfer-table">
+                        <thead>
+                            <tr>
+                                <th>Season</th>
+                                <th>Date</th>
+                                <th>Left Club</th>
+                                <th>Joined Club</th>
+                                <th>Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transfer in player.transfers %}
+                            <tr>
+                                <td class="season-cell">{{ transfer.season }}</td>
+                                <td class="date-cell">{{ transfer.date }}</td>
+                                <td>{{ transfer.left_club }}</td>
+                                <td class="joined-club-cell">
+                                    {% if transfer.joined_club_logo %}
+                                    <img src="{{ transfer.joined_club_logo }}" class="mini-table-logo" alt="Logo">
+                                    {% endif %}
+                                    <strong>{{ transfer.joined_club }}</strong>
+                                </td>
+                                <td class="fee-cell">Free Transfer</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="table-footer-summary">
+                        <span>Total transfer fees:</span>
+                        <strong>€0</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="card gallery-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-camera"></i> Player Gallery & Media Highlights</h2>
+                </div>
+                <div class="card-body">
+                    <p class="gallery-subtext">Recent training, pitch management, and team photographs:</p>
+
+                    <div class="featured-media-frame" data-editable="featuredPhotoUrl">
+                        {% if player.featured_photo_url %}
+                        <img src="{{ player.featured_photo_url }}" alt="Player Training Spotlight"
+                            class="gallery-main-img">
+                        {% else %}
+                        <div class="gallery-empty-state">
+                            <i class="fa-solid fa-image-portrait"></i>
+                            <p>No featured gallery imagery loaded yet.</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="tm-footer">
+        <p>Transfermarkt Unified Dynamic Server Engine Application Clone &copy; 2026</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
