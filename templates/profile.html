@@ -32,56 +32,53 @@
 
             <!-- Main Master Profile Segment Card -->
             <div class="card profile-card">
-                <div class="edit-actions-panel">
-                    <button id="editProfileBtn" class="action-btn edit-mode-btn">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit Profile
-                    </button>
-                    <button id="saveProfileBtn" class="action-btn save-mode-btn hidden">
-                        <i class="fa-solid fa-floppy-disk"></i> Save to Database
-                    </button>
+
+                <button id="saveProfileBtn" class="action-btn save-mode-btn hidden">
+                    <i class="fa-solid fa-floppy-disk"></i> Save to Database
+                </button>
+            </div>
+
+            <div class="profile-header">
+                <!-- Photo block container with data attributes mapping for image swaps -->
+                <div class="player-photo-container" data-editable="photoUrl">
+                    {% if player.photo_url %}
+                    <img src="{{ player.photo_url }}" alt="{{ player.name }}" class="player-profile-img">
+                    {% else %}
+                    <div class="player-photo-placeholder"><i class="fa-solid fa-user-tie"></i></div>
+                    {% endif %}
+                    <div class="player-number" data-editable="number">{{ player.number }}</div>
                 </div>
 
-                <div class="profile-header">
-                    <!-- Photo block container with data attributes mapping for image swaps -->
-                    <div class="player-photo-container" data-editable="photoUrl">
-                        {% if player.photo_url %}
-                        <img src="{{ player.photo_url }}" alt="{{ player.name }}" class="player-profile-img">
-                        {% else %}
-                        <div class="player-photo-placeholder"><i class="fa-solid fa-user-tie"></i></div>
-                        {% endif %}
-                        <div class="player-number" data-editable="number">{{ player.number }}</div>
+                <div class="player-main-info">
+                    <div class="club-info-row">
+                        <span class="status-badge">Active Status</span>
+                        <!-- Club Logo sub-container placeholder element frame -->
+                        <span class="club-logo-container" data-editable="logoUrl">
+                            {% if player.logo_url %}
+                            <img src="{{ player.logo_url }}" alt="Club Crest Shield" class="club-badge-img">
+                            {% endif %}
+                        </span>
+                        <span class="club-name" data-editable="club">{{ player.club }}</span>
                     </div>
-
-                    <div class="player-main-info">
-                        <div class="club-info-row">
-                            <span class="status-badge">Active Status</span>
-                            <!-- Club Logo sub-container placeholder element frame -->
-                            <span class="club-logo-container" data-editable="logoUrl">
-                                {% if player.logo_url %}
-                                <img src="{{ player.logo_url }}" alt="Club Crest Shield" class="club-badge-img">
-                                {% endif %}
-                            </span>
-                            <span class="club-name" data-editable="club">{{ player.club }}</span>
-                        </div>
-                        <h1 class="player-name" id="mainPlayerName" data-editable="name">{{ player.name }}</h1>
-                        <p class="player-meta">
-                            <strong>Position:</strong> <span data-editable="position">{{ player.position }}</span>
-                            <span>|</span>
-                            <span><strong>Citizenship:</strong> {{ player.citizenship }}</span>
-                        </p>
-                    </div>
+                    <h1 class="player-name" id="mainPlayerName" data-editable="name">{{ player.name }}</h1>
+                    <p class="player-meta">
+                        <strong>Position:</strong> <span data-editable="position">{{ player.position }}</span>
+                        <span>|</span>
+                        <span><strong>Citizenship:</strong> {{ player.citizenship }}</span>
+                    </p>
                 </div>
+            </div>
 
-                <div class="profile-quick-stats">
-                    <div class="stat-box">
-                        <span class="stat-label">Date of birth/Age:</span>
-                        <span class="stat-value" data-editable="birthDate">{{ player.birth_date }}</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-label">Live Cloud Link Connection:</span>
-                        <span class="stat-value" style="color:#2980b9; font-size:12px;">/player/{{ player.id }}</span>
-                    </div>
+            <div class="profile-quick-stats">
+                <div class="stat-box">
+                    <span class="stat-label">Date of birth/Age:</span>
+                    <span class="stat-value" data-editable="birthDate">{{ player.birth_date }}</span>
                 </div>
+                <div class="stat-box">
+                    <span class="stat-label">Live Cloud Link Connection:</span>
+                    <span class="stat-value" style="color:#2980b9; font-size:12px;">/player/{{ player.id }}</span>
+                </div>
+            </div>
             </div>
 
             <!-- Deep Specification Metadata Parameters Card -->
@@ -204,7 +201,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card gallery-card">
+            <!-- <div class="card gallery-card">
                 <div class="card-header">
                     <h2><i class="fa-solid fa-camera"></i> Player Gallery & Media Highlights</h2>
                 </div>
@@ -223,7 +220,7 @@
                         {% endif %}
                     </div>
                 </div>
-            </div>
+            </div> -->
         </section>
     </main>
 

@@ -111,7 +111,7 @@ def seed_initial_data():
             citizenship="Nigeria",
             photo_url="https://www.image2url.com/r2/default/images/1781133664238-ed00ca0d-8419-4d37-9c46-9036da50d4ce.jpeg",
             logo_url="https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=100",
-            featured_photo_url="https://www.image2url.com/r2/default/images/1781178544859-4c9941bb-90cc-4b88-844b-2c60ba560756.jpeg"
+            # featured_photo_url="https://www.image2url.com/r2/default/images/1781178544859-4c9941bb-90cc-4b88-844b-2c60ba560756.jpeg"
         )
         t1 = TransferHistory(season="25/26", date="Jan 1, 2026", left_club="Kwara United Academy", joined_club="Ikorodu City", joined_club_logo="https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=50")
         t2 = TransferHistory(season="24/26", date="Aug 12, 2024", left_club="Soccer Pro", joined_club="Kwara United Academy", joined_club_logo="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=50")
