@@ -123,6 +123,49 @@
                     </div>
                 </div>
             </div>
+            <div class="card performance-card">
+                <div class="card-header">
+                    <h2>Performance Data</h2>
+                </div>
+                <div class="card-body" style="padding: 0;">
+                    <table class="performance-table">
+                        <thead>
+                            <tr>
+                                <th class="left-align">Competition</th>
+                                <th><i class="fa-solid fa-shirt" title="Matches Played"></i></th>
+                                <th><i class="fa-solid fa-gavel" title="Goals"></i></th>
+                                <th><i class="fa-solid fa-regular fa-futbol" title="Assists"
+                                        style="color: #27ae60;"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stat in player.stats %}
+                            <tr>
+                                <td class="competition-cell">
+                                    {% if stat.competition_logo %}
+                                    <img src="{{ stat.competition_logo }}" class="mini-league-logo" alt="League Logo">
+                                    {% endif %}
+                                    <span class="league-link">{{ stat.competition }}</span>
+                                </td>
+                                <td class="stat-num-cell" data-editable="matches">{{ stat.matches }}</td>
+                                <td class="stat-num-cell" data-editable="goals">{{ stat.goals }}</td>
+                                <td class="stat-num-cell" data-editable="assists">{{ stat.assists }}</td>
+                            </tr>
+                            <tr class="total-stats-row">
+                                <td class="left-align"><strong>Total:</strong></td>
+                                <td><strong>{{ stat.matches }}</strong></td>
+                                <td><strong>{{ stat.goals }}</strong></td>
+                                <td><strong>{{ stat.assists }}</strong></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="stats-footer-link">
+                        <a href="#">View full stats <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
             <div class="card history-card">
                 <div class="card-header">
                     <h2>Transfer History</h2>

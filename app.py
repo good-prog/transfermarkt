@@ -30,6 +30,7 @@ class Player(db.Model):
     logo_url = db.Column(db.String(500))     
     featured_photo_url = db.Column(db.String(500))          # Dynamic club logo icon URL
     transfers = db.relationship('TransferHistory', backref='player', lazy=True, cascade="all, delete-orphan")
+    stats = db.relationship('PerformanceData', backref='player', lazy=True, cascade="all, delete-orphan")
 
 class TransferHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,6 +40,17 @@ class TransferHistory(db.Model):
     left_club = db.Column(db.String(100))
     joined_club = db.Column(db.String(100))
     joined_club_logo = db.Column(db.String(500))  #
+
+
+
+class PerformanceData(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('player.id'), nullable=False)
+    competition = db.Column(db.String(100), default="NPFL")
+    competition_logo = db.Column(db.String(500)) # URL to league logo
+    matches = db.Column(db.Integer, default=0)
+    goals = db.Column(db.Integer, default=0)
+    assists = db.Column(db.Integer, default=0)    
 # ----------------------------------------------------
 # ROUTING HANDLERS
 # ----------------------------------------------------
@@ -107,6 +119,14 @@ def seed_initial_data():
         
         player1.transfers.extend([t1, t2, t3])
         
+        p_stats = PerformanceData(
+            competition="NPFL",
+            competition_logo="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=50", 
+            matches=27,
+            goals=10,
+            assists=6
+        )    
+        player1.stats.append(p_stats)
         db.session.add(player1)
         
         db.session.commit()
