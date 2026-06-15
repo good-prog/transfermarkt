@@ -109,7 +109,7 @@ def seed_initial_data():
             contract_expiry="-",
             birth_date="21/10/2004 (22)",
             citizenship="Nigeria",
-            photo_url="https://www.image2url.com/r2/default/images/1781518869936-21bc6f82-34bd-4d59-a169-af9faafbaa7e.jpeg",
+            photo_url="https://www.image2url.com/r2/default/images/1781535317885-c3609a17-483f-47f1-a755-848657f7ef7c.jpeg",
             logo_url="https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=100",
             # featured_photo_url="https://www.image2url.com/r2/default/images/1781178544859-4c9941bb-90cc-4b88-844b-2c60ba560756.jpeg"
         )
@@ -136,9 +136,9 @@ if __name__ == '__main__':
         db.create_all()      # Auto-generates local players.db schema instance file
         seed_initial_data()  # Generates initial player tables parameters
     print("Flask Server Database initialized successfully.")
-# app.run(debug= True)     
+app.run(debug= True)     
      
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    # port = int(os.environ.get("PORT", 5000))
+    # app.run(host="0.0.0.0", port=port, debug=True)
 
 
