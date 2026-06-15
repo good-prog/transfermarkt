@@ -109,7 +109,7 @@ def seed_initial_data():
             contract_expiry="-",
             birth_date="21/10/2004 (22)",
             citizenship="Nigeria",
-            photo_url="![image](https://www.image2url.com/r2/default/images/1781518869936-21bc6f82-34bd-4d59-a169-af9faafbaa7e.jpeg)",
+            photo_url="https://www.image2url.com/r2/default/images/1781518869936-21bc6f82-34bd-4d59-a169-af9faafbaa7e.jpeg",
             logo_url="https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=100",
             # featured_photo_url="https://www.image2url.com/r2/default/images/1781178544859-4c9941bb-90cc-4b88-844b-2c60ba560756.jpeg"
         )
