@@ -99,22 +99,22 @@ def seed_initial_data():
     if Player.query.count() == 0:
         player1 = Player(
             id=1,
-            name="Olorunnishola Shile",
-            home_name="Olorunnishola Shile",
+            name="Olorunnishola OlanShile Robiu",
+            home_name="Olorunnishola OlanShile Robiu",
             number="#10",
             position="Central Midfielder and Defensive Midfielder",
             club="Ikorodu City FC",
             foot="right",
             joined_date="Jan 1, 2026",
             contract_expiry="-",
-            birth_date="03/10/2004 (22)",
+            birth_date="21/10/2004 (22)",
             citizenship="Nigeria",
-            photo_url="https://www.image2url.com/r2/default/images/1781133664238-ed00ca0d-8419-4d37-9c46-9036da50d4ce.jpeg",
+            photo_url="![image](https://www.image2url.com/r2/default/images/1781518869936-21bc6f82-34bd-4d59-a169-af9faafbaa7e.jpeg)",
             logo_url="https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=100",
             # featured_photo_url="https://www.image2url.com/r2/default/images/1781178544859-4c9941bb-90cc-4b88-844b-2c60ba560756.jpeg"
         )
         t1 = TransferHistory(season="25/26", date="Jan 1, 2026", left_club="Kwara United Academy", joined_club="Ikorodu City", joined_club_logo="https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=50")
-        t2 = TransferHistory(season="24/26", date="Aug 12, 2024", left_club="Soccer Pro", joined_club="Kwara United Academy", joined_club_logo="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=50")
+        t2 = TransferHistory(season="24/25", date="Aug 12, 2024", left_club="Soccer Pro", joined_club="Kwara United Academy", joined_club_logo="https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=50")
         t3 = TransferHistory(season="22/24", date="Feb 05, 2022", left_club="Youth System", joined_club="Soccer Pro", joined_club_logo="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=50")
         
         player1.transfers.extend([t1, t2, t3])
@@ -136,7 +136,7 @@ if __name__ == '__main__':
         db.create_all()      # Auto-generates local players.db schema instance file
         seed_initial_data()  # Generates initial player tables parameters
     print("Flask Server Database initialized successfully.")
-     
+# app.run(debug= True)     
      
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
